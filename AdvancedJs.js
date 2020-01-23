@@ -121,6 +121,7 @@ interviewQuestion('designer')('KD');
 
 //Closures
 
+/*
 function retirement(retirementAge) {
     var a = ' years left until retirement';
     return function(yearOfBirth) {
@@ -131,7 +132,7 @@ function retirement(retirementAge) {
 
 var retirementUS = retirement(66);
 
-retirementUS(1990);  /* OR */ 
+retirementUS(1990);  // OR  
 retirement(66)(1990);
 
 
@@ -154,71 +155,69 @@ interviewQuestion('teacher')('john');
 interviewQuestion('designer')('mark');
 interviewQuestion('others')('jane');
 
+*/
 
 
+//Bind,Call,Apply
 
+//Call Method
 
+var john = {
+    name:'john',
+    age: 26,
+    job : 'teacher',
+    presentation:function(style,timeOfDay) {
+        if(style==='formal') {
+            console.log('Good ' +timeOfDay+ ', I\'m ' +this.name+ ', I\'m a ' + this.job+ ' and I\'m a ' +this.age +' years old.');
+        }
+        else {
+            console.log('Hey Whats\'s up, I\'m ' +this.name + ', I\'m ' +this.name+ ', I\'m a ' +this.job+ ' and I\'m a ' +this.age +' years old. Have a nice ' +timeOfDay);
+        }
+    }
+};
 
+var kd = {
+    name:'KD',
+    age: 21,
+    job:'Intern'
+}
 
 
 
+john.presentation('formal','Morning');
+john.presentation.call(kd,'Unformal','Afternoon');
 
 
+// Bind
 
+var johnFrendly = john.presentation.bind(john,'friendly');
+johnFrendly('Morning');
 
+var KDFormal = john.presentation.bind(kd,'formal');
+KDFormal('Night');
 
 
+//Example
 
+var years = [1990,1965,1937,2005,1998];
 
+function arrayCalc(arr,fn) {
+    var arrRes = [];
+    for(var i = 0 ; i < arr.length ; i++) {
+        arrRes.push(fn(arr[i]));
+    }
+    return arrRes;
+}
 
+function calculateAge(el) {
+    return 2016 - el;
+}
 
+function isFullAge(limit,el) {
+    return el >= 18;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+var ages = arrayCalc(years,calculateAge);
+console.log(ages);
+var fullIndia = arrayCalc(ages,isFullAge.bind(this,18));
+console.log(fullIndia);

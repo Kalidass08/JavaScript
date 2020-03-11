@@ -1,0 +1,30 @@
+class Employee{
+  employeeName: string;
+
+  constructor(name: string){
+    this.employeeName = name;
+  }
+  greet(){
+    console.log(`Happy Noon,${this.employeeName}`);
+  }
+}
+
+let emp1 = new Employee('KALIDASS');
+emp1.greet();
+
+//Inheritance
+
+class Manager extends Employee{
+  constructor(managerName: string)
+  {
+    super(managerName);
+  }
+  delegateWork()
+  {
+    console.log(`Manager Delegating Work`);
+  }
+}
+
+let m1 = new Manager('KD');
+m1.greet();
+m1.delegateWork();
